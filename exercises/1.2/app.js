@@ -8,32 +8,24 @@ var usersRouter = require('./routes/users');
 const { log } = require('console');
 
 var app = express();
-let counter = [];
-counter[0] = 0;
-counter[1] = 0;
-counter[2] = 0;
-counter[3] = 0;
+
+let counter = {};
 app.use((req, res, next) => {
     console.log("Requete vers : "+req.method+" "+req.path);
-    switch(req.method+" "+req.path){
-        case "GET /":
-            counter[0]++;
-            break;
-        case "GET /pizzas":
-            counter[1]++;
-            break;
-        case "POST /pizzas":
-            counter[2]++;
-            break;
-        case "DELETE /pizzas":
-            counter[3]++;
-            break;
+
+    let request = req.method+" "+req.path;
+
+    if(counter[request] == undefined){
+        counter[request] = 1;
+    }else{
+        counter[request]++;
     }
+
     console.log("Requests counter : ");
-    console.log("- GET / : "+counter[0]);
-    console.log("- GET /pizzas : "+counter[1]);
-    console.log("- POST /pizzas : "+counter[2]);
-    console.log("- DELETE /pizzas : "+counter[3]);
+    for(let key in counter){
+        console.log("- "+key+ " : "+counter[key]);
+    }
+    next();
 })
 
 app.use(logger('dev'));
