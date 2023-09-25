@@ -1,0 +1,13 @@
+### Read all pizzas with File variable
+@baseUrl = http://localhost:3000
+
+### Create a film
+POST {{baseUrl}}/films
+Content-Type: application/json
+
+{
+    "title":"Star Wars, épisode IX : L'Ascension de Skywalker",
+    "duration": 141,
+    "budget": 416, 
+    "link": "https://www.imdb.com/title/tt2527338/?ref_=ext_shr_lnk"
+}
