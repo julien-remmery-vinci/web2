@@ -27,20 +27,46 @@ const FILMS = [
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
+    console.log('GET /films');
+
     const minimumDuration = req?.query?.["minimum-duration"] ?? undefined;
-    let filteredFilms;
+    const filterStartWith = req?.query?.["start-with"] ?? undefined;
+    const orderByBudget =
+      req?.query?.order?.includes('budget')
+        ? req.query.order
+        : undefined;
+    
+    if (!minimumDuration && !filterStartWith && !orderByBudget) 
+        res.json(FILMS);
+    
+        let filteredFilms;
 
     if (minimumDuration){
         console.log(`minimum durarion : ${minimumDuration}`);
-        filteredFilms = [];
+        filteredFilms = {};
         for (const film of FILMS) {
             if (film.duration >= minimumDuration) {
-                filteredFilms.push(film);            
+                filteredFilms.join(film);            
             }
         }
     }
-    
-    console.log('GET /films');
+    if(filterStartWith){
+        console.log(`Filter film names starting with : ${filterStartWith}`);
+        filteredFilms = {};
+        for (const film of FILMS) {
+            if (film.title.startsWith(filterStartWith)) {
+                filteredFilms.join(film);        
+            }
+        }
+    }
+    if (orderByBudget){
+        console.log("Order by budget");
+        filteredFilms = [...FILMS].sort((a, b) => b.budget - a.budget);
+    }
+    console.log(filteredFilms);
+    if(!filteredFilms || Object.keys(filteredFilms).length === 0) res.sendStatus(400);
+
+    if (orderByBudget === '-budget') filteredFilms = filteredFilms.reverse();
     res.json(filteredFilms ?? FILMS);
   });
 

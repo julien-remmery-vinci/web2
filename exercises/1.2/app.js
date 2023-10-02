@@ -9,12 +9,17 @@ const { log } = require('console');
 
 var app = express();
 
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+
 let counter = {};
 app.use((req, res, next) => {
     console.log("Requete vers : "+req.method+" "+req.path);
 
     let request = req.method+" "+req.path;
-
+    console.log(counter);
     if(counter[request] == undefined){
         counter[request] = 1;
     }else{
@@ -28,10 +33,6 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
