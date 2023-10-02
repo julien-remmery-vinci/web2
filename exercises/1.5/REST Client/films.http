@@ -6,14 +6,14 @@ GET {{baseUrl}}/films
 ###Read all films with a minimum duration of 160 minutes
 GET {{baseUrl}}/films?minimum-duration=160
 
-###Read all films that start with provided string
-GET {{baseUrl}}/films?start-with=Star&Wars
+# ###Read all films that start with provided string
+# GET {{baseUrl}}/films?start-with=Star&Wars
 
-###Read all films ordering by budget descending
-GET {{baseUrl}}/films?order=budget
+# ###Read all films ordering by budget descending
+# GET {{baseUrl}}/films?order=budget
 
-###Read all films ordering by budget ascending
-GET {{baseUrl}}/films?order=-budget
+# ###Read all films ordering by budget ascending
+# GET {{baseUrl}}/films?order=-budget
 
 
 ### Create a film
