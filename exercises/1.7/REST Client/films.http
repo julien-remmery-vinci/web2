@@ -28,7 +28,7 @@ Content-Type: application/json
 }
 
 ### Delete a film
-DELETE {{baseUrl}}/films/3
+DELETE {{baseUrl}}/films/4
 
 ### Update the film identified by 2
 PATCH {{baseUrl}}/films/2

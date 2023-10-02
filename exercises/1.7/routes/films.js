@@ -1,7 +1,7 @@
 var express = require('express');
 const { serialize, parse } = require('../utils/json.js');
 var router = express.Router();
-const jsonDbPath = __dirname + '/../data/pizzas.json';
+const jsonDbPath = __dirname + '/../data/films.json';
 
 const FILMS = [
     {
@@ -90,7 +90,7 @@ router.post('/', (req, res) => {
   });
   
   router.delete('/:id', (req, res) => {
-    const films = parse(jsonDbPath, MENU);
+    const films = parse(jsonDbPath, FILMS);
 
     const indexOfFilmFound = films.findIndex((film) => film.id == req.params.id);
   
