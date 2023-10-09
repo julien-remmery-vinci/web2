@@ -45,10 +45,11 @@ function readAllPizzas(orderBy) {
 
 function readOnePizza(id) {
   const idNumber = parseInt(id, 10);
+  console.log(idNumber);
   const pizzas = parse(jsonDbPath, defaultPizzas);
   const indexOfPizzaFound = pizzas.findIndex((pizza) => pizza.id === idNumber);
+  console.log(indexOfPizzaFound);
   if (indexOfPizzaFound < 0) return undefined;
-
   return pizzas[indexOfPizzaFound];
 }
 

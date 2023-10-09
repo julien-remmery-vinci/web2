@@ -14,7 +14,7 @@ GET {{baseUrl}}/pizzas/?order=+title
 GET {{baseUrl}}/pizzas/?order=-title
 
 ### Read pizza identified by 2
-GET {{baseUrl}}/pizzas/2
+GET {{baseUrl}}/pizzas/3
 
 ### Create a pizza
 POST {{baseUrl}}/pizzas
