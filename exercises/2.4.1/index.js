@@ -3,10 +3,10 @@ const nbClicks = document.getElementById('clicks');
 const message = document.getElementById('message');
 
 let clicks = 0;
-let running = false;
 let nbSeconds = 5;
 let timeout;
-nbClicks.textContent = `Clicks : ${clicks}`
+let startTime;
+let neededClicks = 10;
 
 button.addEventListener("mouseover", (e) => {
     start();
@@ -14,14 +14,14 @@ button.addEventListener("mouseover", (e) => {
 
 button.addEventListener("click", (e) => {
     clicks++;
-    if(running && clicks===10){
+    if(clicks===neededClicks){
         end();
     }
     nbClicks.textContent = `Clicks : ${clicks}`
 });
 
 function start(){
-    running = true;
+    startTime = new Date();
     timeout = setTimeout(() => {
         message.textContent = 'Game over, you did not click 10 times within 5s !';
     }, nbSeconds*1000);
@@ -29,6 +29,6 @@ function start(){
 
 function end(){
     clearTimeout(timeout);
-    running = false;
-    message.textContent = `You win ! You clicked 10 times within ${nbSeconds} ms`;
+    button.style.display = 'none'
+    message.textContent = `You win ! You clicked ${neededClicks} times within ${new Date().getTime()-startTime.getTime()} ms`;
 }
